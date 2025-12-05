@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESPORT AWARD - Vote</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <div class="vote-container">
+      <h1 class="page-title">Vote ESPORT AWARD 2026</h1>
+      <p class="vote-description">Exprime ton influence dans l'une des plus grandes cérémonies esport.</p>
+
+      <!-- Switch entre Vote par catégorie et Tier list -->
+      <div class="vote-mode-switch">
+        <button class="mode-btn active" data-mode="categories">Vote par catégorie</button>
+        <button class="mode-btn" data-mode="tierlist">Tier list meilleur jeu de l'année</button>
+      </div>
+
+      <!-- Section Vote par catégorie -->
+      <div id="categories-view" class="vote-view">
+        <!-- Filtres par jeu -->
+        <div class="game-filters sticky-filters">
+          <button class="filter-btn active" data-game="all">Tous les jeux</button>
+          <% games.forEach(game => { %>
+            <button class="filter-btn" data-game="<%= game.id %>"><%= game.name %></button>
+          <% }) %>
+        </div>
+
+        <% games.forEach(game => { %>
+          <section class="game-section" data-game-id="<%= game.id %>">
+            <div class="game-header">
+              <img src="<%= game.image %>" alt="<%= game.name %>" class="game-image">
+              <h2 class="game-title"><%= game.name %></h2>
+            </div>
+
+            <% game.categories.forEach(category => { %>
+              <div class="category">
+                <h3 class="category-title"><%= category.name %></h3>
+                <div class="nominee-grid">
+                  <% category.nominees.forEach(nominee => { %>
+                    <div class="nominee-card" data-category-id="<%= category.id %>" data-nominee-id="<%= nominee.id %>" data-game-id="<%= game.id %>">
+                    <div class="nominee-content">
+                      <h4 class="nominee-name"><%= nominee.displayName %></h4>
+                      <% if (nominee.team) { %>
+                        <p class="nominee-team"><%= nominee.team %></p>
+                      <% } %>
+                      <p class="nominee-role"><%= nominee.roleDescription %></p>
+                      <button class="vote-btn">Sélectionner ce nominé</button>
+                    </div>
+                    </div>
+                  <% }) %>
+                </div>
+              </div>
+          <% }) %>
+        </section>
+      <% }) %>
+
+      <!-- Résumé des votes -->
+      <div class="votes-summary">
+        <h2 class="summary-title">Tes votes enregistrés</h2>
+        <div id="summary-content" class="summary-content">
+          <p class="summary-empty">Aucun vote enregistré pour le moment.</p>
+        </div>
+        <button class="summary-edit-btn" id="summary-edit-btn" style="display: none;">Modifier mes votes</button>
+      </div>
+      </div>
+
+      <!-- Section Tier list -->
+      <div id="tierlist-view" class="vote-view hidden">
+        <div class="tierlist-container">
+          <h2 class="tierlist-title">Tier list du meilleur jeu esport de l'année</h2>
+          <p class="tierlist-description">Classe les jeux esports selon leur impact, popularité et niveau compétitif.</p>
+          <p class="tierlist-instructions">Glissez-déposez les jeux dans la catégorie qui leur correspond.</p>
+          
+          <div class="tierlist-tiers">
+            <div class="tier-row" data-tier="S">
+              <div class="tier-label tier-s">S</div>
+              <div class="tier-games" data-tier="S"></div>
+            </div>
+            <div class="tier-row" data-tier="A">
+              <div class="tier-label tier-a">A</div>
+              <div class="tier-games" data-tier="A"></div>
+            </div>
+            <div class="tier-row" data-tier="B">
+              <div class="tier-label tier-b">B</div>
+              <div class="tier-games" data-tier="B"></div>
+            </div>
+            <div class="tier-row" data-tier="C">
+              <div class="tier-label tier-c">C</div>
+              <div class="tier-games" data-tier="C"></div>
+            </div>
+          </div>
+
+          <div class="tierlist-unranked">
+            <h3 class="unranked-title">Jeux non classés</h3>
+            <div class="unranked-games">
+              <% games.forEach(game => { %>
+                <div class="tier-game-card" draggable="true" data-game-id="<%= game.id %>">
+                  <img src="<%= game.image %>" alt="<%= game.name %>" class="tier-game-image">
+                  <span class="tier-game-name"><%= game.name %></span>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pop-up de confirmation -->
+      <div id="vote-modal" class="vote-modal hidden">
+        <div class="modal-content">
+          <div class="modal-icon">🎉</div>
+          <h2 class="modal-title">Vote enregistré avec succès ⚡</h2>
+          <p class="modal-message" id="modal-message">Merci de participer à l'ESPORT AWARD.</p>
+          <button class="modal-close-btn" id="modal-close">Continuer à voter</button>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/vote.js"></script>
+</body>
+</html>
+

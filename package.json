@@ -1,17 +1,8 @@
 {
   "name": "esport-award",
-  "version": "1.0.0",
-  "description": "Prototype de site de vote ESPORT AWARD",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "keywords": ["esport", "vote", "prototype"],
+  "version": "2.0.0",
+  "description": "Site statique de vote ESPORT AWARD - Compatible GitHub Pages",
+  "keywords": ["esport", "vote", "static", "github-pages"],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "ejs": "^3.1.9"
-  }
+  "license": "ISC"
 }
-

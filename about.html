@@ -4,10 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESPORT AWARD - À propos</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <%- include('partials/header') %>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">ESPORT AWARD</h1>
+      <nav>
+        <a href="./index.html" class="nav-link">Accueil</a>
+        <a href="./vote.html" class="nav-link">Vote</a>
+        <a href="./about.html" class="nav-link">Infos</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <div class="about-container">
@@ -24,14 +33,19 @@
           n'est implémenté. Il s'agit d'un prototype front-end uniquement.
         </p>
         <p>
-          Ce projet utilise Node.js avec Express et EJS pour le rendu côté serveur,
-          avec des animations et interactions gérées en JavaScript vanilla.
+          Ce projet est un site statique 100% côté client, compatible avec GitHub Pages.
+          Les animations et interactions sont gérées en JavaScript vanilla, et les données
+          sont stockées localement dans le navigateur via localStorage.
         </p>
       </div>
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <footer>
+    <p>&copy; 2026 ESPORT AWARD - Prototype</p>
+  </footer>
+
+  <script src="./js/main.js" defer></script>
 </body>
 </html>
 

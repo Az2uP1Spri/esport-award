@@ -1,83 +1,152 @@
-# ESPORT AWARD - Prototype
+# ESPORT AWARD - Site Statique
 
-Prototype de site de vote pour une cérémonie fictive d'esport.
+Site statique de vote pour une cérémonie fictive d'esport, **100% compatible avec GitHub Pages**.
 
-## Stack Technique
+## 🎯 Caractéristiques
 
-- **Node.js** - Runtime JavaScript
-- **Express** - Framework web
-- **EJS** - Moteur de templates
-- **HTML/CSS/JavaScript** - Front-end vanilla
+- **Site 100% statique** - HTML/CSS/JavaScript côté client uniquement
+- **Aucun serveur requis** - Fonctionne directement avec GitHub Pages
+- **Compatible GitHub Pages** - Déployable depuis la branche `main` / dossier `root`
 
-## Installation
-
-1. Installer les dépendances :
-```bash
-npm install
-```
-
-2. Démarrer le serveur :
-```bash
-npm start
-```
-
-3. Ouvrir dans le navigateur :
-```
-http://localhost:3000
-```
-
-## Structure du Projet
+## 📁 Structure du Projet
 
 ```
 .
-├── app.js                 # Serveur Express
-├── package.json           # Dépendances npm
+├── index.html          # Page d'accueil
+├── vote.html          # Page de vote (catégories + tier list)
+├── about.html         # Page à propos
+├── css/
+│   └── style.css     # Styles futuristes
+├── js/
+│   ├── main.js       # Navigation commune
+│   └── vote.js       # Logique de vote + tier list
 ├── data/
-│   └── esportData.js     # Données mock (jeux, catégories, nominés)
-├── views/
-│   ├── index.ejs         # Page d'accueil
-│   ├── vote.ejs          # Page de vote
-│   ├── about.ejs         # Page à propos
-│   └── partials/
-│       ├── header.ejs    # En-tête
-│       └── footer.ejs    # Pied de page
-└── public/
-    ├── css/
-    │   └── style.css     # Styles futuristes
-    └── js/
-        └── vote.js       # Logique de vote (front-end)
+│   └── esportData.js # Données des jeux, catégories, nominés
+└── assets/
+    └── games/        # Images des jeux
 ```
 
-## Fonctionnalités
+## 🚀 Utilisation Locale
 
-- **Page d'accueil** (`/`) - Hero section avec appel à l'action
-- **Page de vote** (`/vote`) - Interface de vote avec cartes de nominés
-- **Page à propos** (`/about`) - Informations sur le projet
+### Option 1 : Ouvrir directement dans le navigateur
+Ouvrez simplement `index.html` dans votre navigateur.
 
-### Système de Vote (Prototype)
+**Note :** Certains navigateurs peuvent bloquer les requêtes de fichiers locaux. Si vous rencontrez des problèmes, utilisez l'option 2.
 
-- Les votes sont **simulés côté front-end uniquement**
-- Aucune donnée n'est stockée en base de données
-- Les votes sont sauvegardés dans le `localStorage` du navigateur
-- Animation de toast de confirmation après chaque vote
-- Sélection visuelle des cartes votées
+### Option 2 : Serveur local simple
 
-## Notes Importantes
+#### Avec Python 3 :
+```bash
+python -m http.server 8000
+```
+Puis ouvrez : `http://localhost:8000`
 
-⚠️ **Ce projet est un prototype** :
-- Pas de base de données
-- Pas d'authentification
-- Pas de backend pour les votes
-- Tous les votes sont simulés côté client
+#### Avec Node.js (http-server) :
+```bash
+npx http-server -p 8000
+```
 
-## Personnalisation
+#### Avec PHP :
+```bash
+php -S localhost:8000
+```
 
-Les données des jeux, joueurs et équipes sont dans `data/esportData.js`. Vous pouvez :
-- Modifier les noms des placeholders
-- Ajouter de nouveaux jeux/catégories
-- Remplacer les chemins d'images par de vraies images dans `public/assets/`
+## 🌐 Déploiement sur GitHub Pages
 
-## Licence
+1. **Pousser le code sur GitHub** :
+   ```bash
+   git add .
+   git commit -m "Convert to static site"
+   git push origin main
+   ```
+
+2. **Activer GitHub Pages** :
+   - Aller dans les **Settings** du repository
+   - Section **Pages**
+   - Source : **Deploy from a branch**
+   - Branch : **main** / **root**
+   - Cliquer sur **Save**
+
+3. **Accéder au site** :
+   - URL : `https://[votre-username].github.io/esport-award/`
+   - Exemple : `https://az2up1spri.github.io/esport-award/`
+
+## ✨ Fonctionnalités
+
+### Page d'accueil (`index.html`)
+- Hero section avec appel à l'action
+- Navigation vers la page de vote
+
+### Page de vote (`vote.html`)
+- **Vote par catégories** :
+  - Filtres par jeu (Tous les jeux, League of Legends, Valorant, etc.)
+  - Cartes de nominés (joueurs/équipes) par catégorie
+  - Sélection visuelle des votes
+  - Résumé des votes enregistrés
+  
+- **Tier list meilleur jeu de l'année** :
+  - Drag & drop des jeux dans les catégories S / A / B / C
+  - Sauvegarde automatique dans localStorage
+
+- **Système de vote** :
+  - Votes simulés côté client uniquement
+  - Sauvegarde dans `localStorage` du navigateur
+  - Animation de confettis après chaque vote
+  - Popup de confirmation
+
+### Page à propos (`about.html`)
+- Informations sur le projet
+
+## 🔧 Technologies
+
+- **HTML5** - Structure
+- **CSS3** - Styles avec animations et gradients
+- **JavaScript Vanilla** - Logique côté client
+- **localStorage** - Persistance des votes localement
+
+## 📝 Données
+
+Les données des jeux, catégories et nominés sont dans `data/esportData.js` :
+
+```javascript
+const ESPORT_DATA = {
+  games: [
+    {
+      id: "lol",
+      name: "League of Legends",
+      image: "./assets/games/league-of-legends.png",
+      categories: [...]
+    },
+    // ...
+  ]
+};
+```
+
+Les scripts JS chargent ces données et génèrent le HTML dynamiquement.
+
+## ⚠️ Notes Importantes
+
+**Ce projet est un prototype** :
+- ✅ Pas de base de données
+- ✅ Pas d'authentification
+- ✅ Pas de backend
+- ✅ Tous les votes sont simulés côté client
+- ✅ Les votes sont stockés uniquement dans le `localStorage` du navigateur
+
+## 🎨 Personnalisation
+
+### Modifier les données
+Éditez `data/esportData.js` pour :
+- Ajouter/modifier des jeux
+- Ajouter/modifier des catégories
+- Ajouter/modifier des nominés
+
+### Modifier les styles
+Éditez `css/style.css` pour personnaliser l'apparence.
+
+### Ajouter des images
+Placez les images dans `assets/games/`, `assets/players/`, `assets/teams/` et référencez-les dans `esportData.js`.
+
+## 📄 Licence
 
 ISC
-

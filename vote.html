@@ -4,10 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESPORT AWARD - Vote</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <%- include('partials/header') %>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">ESPORT AWARD</h1>
+      <nav>
+        <a href="./index.html" class="nav-link">Accueil</a>
+        <a href="./vote.html" class="nav-link">Vote</a>
+        <a href="./about.html" class="nav-link">Infos</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <div class="vote-container">
@@ -23,50 +32,23 @@
       <!-- Section Vote par catégorie -->
       <div id="categories-view" class="vote-view">
         <!-- Filtres par jeu -->
-        <div class="game-filters sticky-filters">
-          <button class="filter-btn active" data-game="all">Tous les jeux</button>
-          <% games.forEach(game => { %>
-            <button class="filter-btn" data-game="<%= game.id %>"><%= game.name %></button>
-          <% }) %>
+        <div class="game-filters sticky-filters" id="game-filters">
+          <!-- Généré dynamiquement par JS -->
         </div>
 
-        <% games.forEach(game => { %>
-          <section class="game-section" data-game-id="<%= game.id %>">
-            <div class="game-header">
-              <img src="<%= game.image %>" alt="<%= game.name %>" class="game-image">
-              <h2 class="game-title"><%= game.name %></h2>
-            </div>
-
-            <% game.categories.forEach(category => { %>
-              <div class="category">
-                <h3 class="category-title"><%= category.name %></h3>
-                <div class="nominee-grid">
-                  <% category.nominees.forEach(nominee => { %>
-                    <div class="nominee-card" data-category-id="<%= category.id %>" data-nominee-id="<%= nominee.id %>" data-game-id="<%= game.id %>">
-                    <div class="nominee-content">
-                      <h4 class="nominee-name"><%= nominee.displayName %></h4>
-                      <% if (nominee.team) { %>
-                        <p class="nominee-team"><%= nominee.team %></p>
-                      <% } %>
-                      <p class="nominee-role"><%= nominee.roleDescription %></p>
-                      <button class="vote-btn">Sélectionner ce nominé</button>
-                    </div>
-                    </div>
-                  <% }) %>
-                </div>
-              </div>
-          <% }) %>
-        </section>
-      <% }) %>
-
-      <!-- Résumé des votes -->
-      <div class="votes-summary">
-        <h2 class="summary-title">Tes votes enregistrés</h2>
-        <div id="summary-content" class="summary-content">
-          <p class="summary-empty">Aucun vote enregistré pour le moment.</p>
+        <!-- Sections de jeux générées dynamiquement -->
+        <div id="game-sections">
+          <!-- Généré dynamiquement par JS -->
         </div>
-        <button class="summary-edit-btn" id="summary-edit-btn" style="display: none;">Modifier mes votes</button>
-      </div>
+
+        <!-- Résumé des votes -->
+        <div class="votes-summary">
+          <h2 class="summary-title">Tes votes enregistrés</h2>
+          <div id="summary-content" class="summary-content">
+            <p class="summary-empty">Aucun vote enregistré pour le moment.</p>
+          </div>
+          <button class="summary-edit-btn" id="summary-edit-btn" style="display: none;">Modifier mes votes</button>
+        </div>
       </div>
 
       <!-- Section Tier list -->
@@ -97,13 +79,8 @@
 
           <div class="tierlist-unranked">
             <h3 class="unranked-title">Jeux non classés</h3>
-            <div class="unranked-games">
-              <% games.forEach(game => { %>
-                <div class="tier-game-card" draggable="true" data-game-id="<%= game.id %>">
-                  <img src="<%= game.image %>" alt="<%= game.name %>" class="tier-game-image">
-                  <span class="tier-game-name"><%= game.name %></span>
-                </div>
-              <% }) %>
+            <div class="unranked-games" id="unranked-games">
+              <!-- Généré dynamiquement par JS -->
             </div>
           </div>
         </div>
@@ -122,9 +99,13 @@
     </div>
   </main>
 
-  <%- include('partials/footer') %>
+  <footer>
+    <p>&copy; 2026 ESPORT AWARD - Prototype</p>
+  </footer>
 
-  <script src="/js/vote.js"></script>
+  <script src="./data/esportData.js"></script>
+  <script src="./js/vote.js"></script>
+  <script src="./js/main.js" defer></script>
 </body>
 </html>
 
